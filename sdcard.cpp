@@ -58,7 +58,7 @@ int SDCard::save(const char * filename, const char * content){
         return SD_OPEN_FAIL;
     }
  
-    uint byteswritten;
+    unsigned byteswritten;
     res = f_write(&MyFile, content, strlen(content), &byteswritten);
     if(res != FR_OK){
         return SD_WRITE_FAIL;
@@ -72,7 +72,7 @@ int SDCard::save(const string filename, const string content){
     return save(filename.c_str(), content.c_str());
 }
 
-int SDCard::read(const char * filename, char * buffer, uint size){
+int SDCard::read(const char * filename, char * buffer, unsigned size){
     int res = mount();
     if(res != SD_SUCCESS){
         return res;
@@ -83,7 +83,7 @@ int SDCard::read(const char * filename, char * buffer, uint size){
         return SD_OPEN_FAIL;
     }
  
-    uint bytesread;
+    unsigned bytesread;
     res = f_read(&MyFile, buffer, size, &bytesread);
     if(res != FR_OK){
         return SD_WRITE_FAIL;
@@ -104,9 +104,9 @@ string SDCard::read(const string filename){
         return "";
     }
 
-    uint size = f_size(&MyFile);
+    unsigned size = f_size(&MyFile);
     char * buffer = (char *)calloc(size+1,sizeof(char));
-    uint bytesread;
+    unsigned bytesread;
     res = f_read(&MyFile, buffer, size, &bytesread);
     string s = buffer;
     free(buffer);
